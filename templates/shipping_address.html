@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+	{% block main %}
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Checkout</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="single-product.html">Checkout</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Checkout Area =================-->
+    <section class="checkout_area section_gap">
+        <div class="container">
+         
+            
+            <div class="billing_details">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3>Shipping Address</h3>
+                        <form class="row contact_form" method="post">
+                            
+                            {% csrf_token %}
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" placeholder="line1" id="add1" name="add1" required>
+                               
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" placeholder="line2" id="add2" name="add2" required>
+                                
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" placeholder="City" id="city" name="city" required>
+                                
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" placeholder="State" id="state" name="state" required>
+                                
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <select class="country_select" name="country">
+                                    <option value="India">India</option>
+                                    <option value="USA">USA</option>
+                                    <option value="UAE">UAE</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="number" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" required>
+                            </div>
+                            <button type="submit" class="primary-btn">Confirm Order</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="order_box">
+                            <h2>Your Order</h2>
+                            <ul class="list">
+                                <li><a href="#">Product <span>Total</span></a></li>
+                                {% for pr in cart_prod %}
+                                <li><a href="#">{{pr.product.name}} <span class="middle">x {{pr.quantity}}</span> <span class="last">${{pr.sub_total}}</span></a></li>
+                               {% endfor %}
+                            </ul>
+                            <ul class="list list_2">
+                                <li><a href="#">Subtotal <span>${{cart_total}}</span></a></li>
+                             
+                                <li><a href="#">Total <span>${{cart_total}}</span></a></li>
+                            </ul>
+                        
+                         
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Checkout Area =================-->
+{% endblock %}
